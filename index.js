@@ -103,15 +103,28 @@ Use the higher order function getAverageGoals to do the following:
 */
 
 function getAverageGoals(getFinalsCb) {
-  const homeGoals = getFinalsCb(fifaData).reduce(function (accum, item) {
-    accum + item["Home Team Goals"];
-  }, 0);
-  const awayGoals = getFinalsCb(fifaData).reduce(function (accum, item) {
-    accum + item["Away Team Goals"];
-  }, 0);
-  return (homeGoals + awayGoals / homeGoals.length).toFixed(2);
-}
+  // const homeGoals = getFinalsCb(fifaData).reduce(function (accum, item) {
+  //   accum + item["Home Team Goals"];
+  // }, 0);
 
+  const homeGoals = getFinalsCb.reduce((acc, item) => {
+    return acc + item["Home Team Goals"];
+  }, 0);
+  console.log(homeGoals);
+  const awayGoals = getFinalsCb.reduce((acc, item) => {
+    return acc + item["Away Team Goals"];
+  }, 0);
+  console.log(awayGoals);
+
+  //   const awayGoals = getFinalsCb(fifaData).reduce(function (accum, item) {
+  //     accum + item["Away Team Goals"];
+  //   }, 0);
+  return (
+    homeGoals / getFinalsCb.length +
+    awayGoals / getFinalsCb.length
+  ).toFixed(2);
+}
+getAverageGoals(getFinals(fifaData));
 /// 🥅 STRETCH 🥅 ///
 
 /* 💪💪💪💪💪 Stretch 1: 💪💪💪💪💪 
